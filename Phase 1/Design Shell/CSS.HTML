@@ -9,7 +9,15 @@
   background-color: aqua;
   text-align: center;
   }
-  body {
+  .footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+   background-color: yellow;
+   text-align: center;
+   }
+	body {
     background-color: lightblue;
   }
 
@@ -17,7 +25,6 @@
     color: navy;
     margin-left: 20px;
   }
-  
 </style>
 <link rel="stylesheet" href="mystyle.css">
 </head>
@@ -25,9 +32,11 @@
 
 <h1>Hello World</h1>
   <div class="myDiv">
- <h2>This is inside a div</h2>
-<p style = "color:yellow">This is hard to look at.</p>
+    <h2>This is inside a div</h2>
+    <p style = "color:yellow">This is hard to look at.</p>
   </div>
-
+ <div class="footer">
+   <p style = "color: lightblue">Is this what you mean by footer?</p>
+ </div>
 </body>
 </html>
