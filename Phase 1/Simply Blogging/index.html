@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        /* Track */
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        /* Handle */
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+        }
+
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            
+        }
+        body {
+            padding-bottom: 20px;
+        }
+
+
+        .section {
+            /* Needed for children to be absolutely positioned relative to the parent. */
+            position: relative;
+            /* The height of the container. Must be set, but it doesn't really matter what the value is. */
+            height: 100vh;
+            /* For text formatting. */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-shadow: 0 0 5px #000;
+        }
+        .jumbotron-fluid {
+            background-image: url("./assets/images/Background.png");
+            height: 100%;
+        }
+        .submit{
+            outline: none;
+        }
+
+        img {
+            width: 100vw;
+        }
+
+    </style>
+</head>
+<body onload="displayData()">
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" style=" position: fixed; top: 0px; width: 100%; z-index: 3">
+            <a class="navbar-brand" href="#">Robert's Blog</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                <div class="navbar-nav">
+                    <a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-item nav-link" href="#">Blogs</a>
+                    <a class="nav-item nav-link disabled" href="#">About Us</a>
+                    <a class="nav-item nav-link disabled" href="#">Contact Us</a>
+                </div>
+            </div>
+        </nav>
+
+
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container" style="color: white; padding-top: 7%;">
+                <h1 class="display-4">Add to the collection of blogs</h1>
+                <p class="lead">Add blogs down below!</p>
+            </div>
+        </div>
+
+        <div class="container-fluid" style="background-color: #fff; width: 70vw; margin: 3%">
+            <form>
+                <div class="form-group">
+                    <label for="title1">Title</label>
+                    <input type="name" required class="form-control" id="title1" aria-describedby="titlehelp" placeholder="Title">
+                    <small id="titlehelp" class="form-text text-muted">Give us a banger title.</small>
+                </div>
+                <div class="form-group">
+                    <label for="article1">Articles</label>
+                    <textarea class="form-control" required id="article1" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="File1">Image URL</label>
+                    <input type="name" required class="form-control-file" id="file1">
+                </div>
+                <button type="button" accept="image/png, image/jpeg" id="myBtn" style="background-color: #d50a2f; outline: none; border-color: #5a0e2e; " class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+
+
+        <div class="jumbotron" style="background-color: #212121" >
+            <div class="container" style="color: white;">
+                <h1 class="display-4" style="font-size: 35px;">Blog List</h1>
+                <p class="lead">Blog Cards show down below</p>
+                <div class="card-columns" id="add_to_me">
+
+                </div>
+            </div>
+        </div>
+
+
+        <script>
+
+
+
+
+            document.getElementById("myBtn").addEventListener("click", function () {
+
+
+                // take value from text field using id or name
+                //we can store json object. but we have to convert
+                // into string.
+                var blog = {
+                    'Title': '',
+                    'Article': '',
+                    'URL': ''
+                };
+
+                blog["Title"] = document.getElementById("title1").value;
+                blog["Article"] = document.getElementById("article1").value;
+                blog["URL"] = document.getElementById("file1").value;
+                for (var i = 0; i < localStorage.length + 1; i++) {
+                    if (localStorage.getItem(i) === null) {
+                        console.log("setting");
+                        localStorage.setItem(i, JSON.stringify(blog));
+                        break;
+                    }
+
+                }
+
+                displayData();
+
+            });
+
+
+            function displayData() {
+                let totalBudget = 0;
+                var tableContent = ""
+
+                for (var i = 0; i < localStorage.length; i++) {
+                    if (localStorage.getItem(i) === null) {
+                        break;
+                    }
+                    let empObj = localStorage.getItem(i);
+                    let empJson = JSON.parse(empObj)
+                    tableContent += `<div class="card" style="width: 18rem; ">
+                        <img class="card-img-top" id = "blah" src = `+ empJson.URL + ` alt = "Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title" style = "color: black;">`+ empJson.Title + `</h5>
+                                <p class="card-text" style = "color: black;">`+ empJson.Article + `</p>
+                            </div>
+                        </div > </br>`;
+                }
+
+                document.getElementById("add_to_me").innerHTML = tableContent;
+            }
+
+        </script>
+
+    </body>
+</html>
