@@ -1,0 +1,52 @@
+<div>
+  <div class="jumbotron jumbotron-fluid">
+    <div class="row justify-content-center">
+      <div class="form-group">
+        <form #regRef="ngForm"
+              (ngSubmit)="regUser()">
+
+
+          <div *ngFor="let num of allQ; let indexOfelement=index;">
+            <div class="jumbotron" style="background-color: #fff">
+              <h1 class="display-4" style="font-size:25px">{{num.question}}</h1>
+
+
+              <div class="form-check" required>
+                <input type="radio" name="{{indexOfelement}}" id="{{indexOfelement}}-1" value="0" [(ngModel)]="qtd[indexOfelement]" />
+
+                <p class="lead">{{num.answers[0]}}</p>
+
+
+                <input type="radio" name="{{indexOfelement}}" id="{{indexOfelement}}-2" value="1" [(ngModel)]="qtd[indexOfelement]" />
+
+                <p class="lead">{{num.answers[1]}}</p>
+
+
+                <input type="radio" name="{{indexOfelement}}" id="{{indexOfelement}}-3" value="2" [(ngModel)]="qtd[indexOfelement]" />
+
+                <p class="lead">{{num.answers[2]}}</p>
+
+
+                <input type="radio" name="{{indexOfelement}}" id="{{indexOfelement}}-4" value="3" [(ngModel)]="qtd[indexOfelement]" />
+
+                <p class="lead">{{num.answers[3]}}</p>
+
+              </div>
+
+            </div>
+          </div>
+          <!-- Submit button -->
+          <button type="submit" value="submit" class="btn btn-primary btn-block mb-4">Submit</button>
+
+          <a routerLink="">
+            <button type="button" class="btn btn-primary btn-block mb-4" style="background-color: #eee; color: black">Go Back</button>
+          </a>
+
+        </form>
+        <h1 class="display-4" style="font-size:25px">{{msg}}</h1>
+      </div>
+      
+    </div>
+  </div>
+
+</div>
