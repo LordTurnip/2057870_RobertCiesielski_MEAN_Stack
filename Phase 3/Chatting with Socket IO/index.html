@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Stinky Chat</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <style>
+
+        @font-face {
+            font-family: 'Techno';
+            src: url('./assets/fonts/vcr_osd_mono_1.001-webfont.woff2') format('woff2'), url('./assets/fonts/vcr_osd_mono_1.001-webfont.woff') format('woff');
+        }
+
+        /* Remove the navbar's default margin-bottom and rounded borders */
+        .navbar {
+            margin-bottom: 0;
+            border-radius: 0;
+            color: #fff;
+        }
+
+        /* Add a gray background color and some padding to the footer */
+        article {
+            /*  leverage cascade for cross-browser gradients  */
+            background: linear-gradient(90deg, #303b5c, #5e4977, #945486, #c96085, #f37577, #ff9662, #ffc14e, #fff04d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-align: center;
+            display: inline;
+        }
+
+        .mainbody {
+            font-family: 'Techno';
+            background: hsl(204 100% 5%);
+            color: white;
+            min-block-size: 100vh;
+            box-sizing: border-box;
+            display: grid;
+            place-content: center;
+            font-family: system-ui;
+            font-size: min(200%, 5vmin);
+            padding: 40px;
+        }
+
+        h1, p, body {
+            
+            font-family: 'Techno';
+            margin: 0;
+            color: white;
+        }
+
+        body {
+            
+        }
+
+        .jumbotron-fluid {
+            background-color: #fff;
+            color: #212121;
+        }
+
+        h1 {
+            font-size: 10vmin;
+            line-height: 1.1;
+            max-inline-size: 15ch;
+            margin: auto;
+        }
+
+        h5 {
+            font-size: 1.5vmin;
+        }
+
+        p {
+            font-family: 'Techno';
+            margin-top: 1ch;
+            line-height: 1.35;
+            max-inline-size: 40ch;
+            margin: auto;
+        }
+
+        html {
+            block-size: 100%;
+            inline-size: 100%;
+            text-align: center;
+        }
+
+        .card {
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            margin: 20px;
+            padding-bottom: 10px;
+            border-radius: 14px;
+        }
+
+        .card-img-top {
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
+        }
+
+        .row {
+            padding-bottom: 50px;
+        }
+
+        .container {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #footer {
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+            left: 0;
+            height: 20px;
+            background: hsl(204 100% 5%);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                        <span class="icon-bar"></span>
+                        file:///C:/Users/Robal/Documents/2057870_RobertCiesielski_MEAN_Stack/Phase%202/Cart%20Management/index.html#                  <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Stinky Co.</a>
+                </div>
+                <div class="collapse navbar-collapse" id="myNavbar">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#">Chat</a></li>
+
+                    </ul>
+
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="mainbody">
+
+        <article>
+            <h1>Chat</h1>
+        </article>
+        <ul id="message_list" style="list-style-type: none; font-family: 'Techno'; "></ul>
+        <form id="message_area" action="">
+            <input id="text_area" autocomplete="off" style="color: black; font-family: 'Techno';" />
+            <button style="color: black; font-family: 'Techno';">Send</button>
+        </form>
+    </div>
+
+
+    <script>
+        const socket = io();
+
+        let username = window.prompt("Enter the username");
+        if (username === '') {
+            username = 'Guest';
+        }
+        socket.emit('new user', username);
+
+        const messageForm = document.getElementById('message_area');
+        const textInput = document.getElementById('text_area');
+
+        messageForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (textInput.value) {
+                socket.emit('new message', textInput.value);
+                textInput.value = '';
+            }
+        });
+
+        socket.on('send message', (data) => {
+            const messageList = document.getElementById('message_list');
+            const chatItem = document.createElement('li');
+            chatItem.textContent = data.user + ': ' + data.message;
+            messageList.appendChild(chatItem);
+            window.scrollTo(0, document.body.scrollHeight);
+        });
+    </script>
+
+</body>
+
+</html>
