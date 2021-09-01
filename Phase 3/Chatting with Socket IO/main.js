@@ -32,8 +32,8 @@ io.on('connection', (socket) => {
        console.log("Server: Hi " + socket.username + "! Nice to meet you!");
    });
  
-   socket.on('new user', (usr) => {
-       socket.username = usr;
+   socket.on('new user', (user) => {
+       socket.username = user;
        console.log('User connected - Username: ' + socket.username);
    });
 });
