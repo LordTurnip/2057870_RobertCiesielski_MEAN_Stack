@@ -1,0 +1,33 @@
+[
+    {
+        "_id": 75,
+        "source": 40,
+        "destination": 42,
+        "sourceLocation": 39,
+        "destinationLocation": 17.179,
+        "callDuration": 2,
+        "roaming": false,
+        "callCharge": 8.1
+    },
+    {
+        "_id": 74,
+        "source": 35,
+        "destination": 88,
+        "sourceLocation": 8,
+        "destinationLocation": 45.098,
+        "callDuration": 28,
+        "roaming": false,
+        "callCharge": 78.971
+    },
+    {
+        "_id": 54,
+        "source": 98,
+        "destination": 87,
+        "sourceLocation": 21,
+        "destinationLocation": 56.677,
+        "callDuration": 52,
+        "roaming": false,
+        "callCharge": 72.285
+    }
+]
+
