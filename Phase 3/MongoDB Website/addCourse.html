@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="tasks.json"></script>
+    <script type="text/javascript">
+
+        function displayData() {
+            document.getElementById("main").innerHTML = "";
+            console.log("create table")
+            fetch("tasks.json")
+                .then(response => response.json())
+                .then(item => {
+
+                    for (let x = 0; x < item.length; x++) {
+                        if (item[x] === null) {
+
+                        }
+                        else {
+                            console.log(item[x]);
+                            document.getElementById("main").innerHTML += "Emp ID[" + item[x].empid + "] ID[" + item[x].id + "] Task[" + item[x].task + "] Deadline[" + item[x].deadline + "]</br>";
+                        }
+                        
+                    }
+
+                })
+
+
+
+          
+
+        }
+
+
+    </script>
+    <style>
+        *,
+        :before,
+        :after {
+            font-family: 'Roboto';
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #424242;
+            font-family: 'Roboto';
+        }
+
+        form {
+            width: 320px;
+            margin: 45px auto;
+        }
+
+        form h1 {
+            font-size: 55px;
+            font-weight: 300;
+            text-align: center;
+            color: #DE6449;
+        }
+
+        .group {
+            position: relative;
+            margin: 45px 0;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+        input,
+        textarea {
+            background: none;
+            color: #c6c6c6;
+            font-size: 18px;
+            padding: 10px 10px 10px 5px;
+            display: block;
+            width: 320px;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid #c6c6c6;
+        }
+
+            input:focus,
+            textarea:focus {
+                outline: none;
+            }
+
+                input:focus ~ label, input:valid ~ label,
+                textarea:focus ~ label,
+                textarea:valid ~ label {
+                    top: -14px;
+                    font-size: 12px;
+                    color: #8b8b8b;
+                }
+
+                input:focus ~ .bar:before,
+                textarea:focus ~ .bar:before {
+                    width: 320px;
+                }
+
+        label {
+            color: #DE6449;
+            font-size: 16px;
+            font-weight: normal;
+            position: absolute;
+            pointer-events: none;
+            left: 5px;
+            top: 10px;
+            transition: 300ms ease all;
+        }
+
+        .bar {
+            position: relative;
+            display: block;
+            width: 320px;
+        }
+
+        .btn {
+            background: #fff;
+            color: #959595;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 3px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            text-decoration: none;
+            outline: none;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        }
+
+            .btn:hover {
+                color: #8b8b8b;
+                box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18), 0 5px 5px rgba(0, 0, 0, 0.12);
+            }
+
+            .btn.btn-submit {
+                background: #DE6449;
+                color: #eee;
+            }
+
+                .btn.btn-submit:hover {
+                    background: #C35A43;
+                    color: #eee;
+                }
+
+            .btn.btn-normal {
+                background: #eee;
+            }
+
+                .btn.btn-normal:hover {
+                    background: #e1e1e1;
+                    color: #8b8b8b;
+                }
+
+        .btn-box {
+            text-align: center;
+            margin: 50px 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <form action="/create-task" method="POST">
+            <h1>Add Course</h1>
+            <div class="group">
+                <input type="number" name="courseID" required="required" /><span class="highlight"></span><span class="bar"></span>
+                <label>Course ID</label>
+            </div>
+            <div class="group">
+                <input type="text" name="courseName" required="required" /><span class="highlight"></span><span class="bar"></span>
+                <label>Course Name</label>
+            </div>
+            <div class="group">
+                <input type="text" name="description" required="required" /><span class="highlight"></span><span class="bar"></span>
+                <label>Description</label>
+            </div>
+            <div class="group">
+                <input type="number" name="amount" required="required" /><span class="highlight"></span><span class="bar"></span>
+                <label>Amount</label>
+            </div>
+            <div class="btn-box">
+                <button class="btn btn-submit" type="submit">submit</button>
+                <button class="btn btn-normal" type="reset">clear</button>
+
+            </div>
+        </form>
+        <form action="/" method="POST">
+            <div class="btn-box">
+                <button class="btn btn-submit" type="submit">back</button>
+
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>
